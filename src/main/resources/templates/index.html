@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Invoice</title>
 </head>
 <body>
-
+    <h1 th:text="Invoice">Invoice</h1>
+    <h3 th:text="${invoice.description + ' ' + invoice.client.name + ' ' + invoice.client.lastName}">Description</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="arrow: ${invoice.arrows}">
+                <td th:text="${arrow.product.name}"></td>
+                <td th:text="${arrow.product.price}"></td>
+                <td th:text="${arrow.quantity}"></td>
+                <td th:text="${arrow.calcFinalPrice()}"></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
